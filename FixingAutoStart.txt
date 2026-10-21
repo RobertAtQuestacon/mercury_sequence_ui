@@ -1,0 +1,43 @@
+A warm boot with my autorun.desktop file would start the robot moving, but a cold boot would fail. I thought it was the serial port not having permission, so I followed googles advice with the followiung:
+
+Not sure how many of these were actually necessary:
+
+  sudo systemctl stop serial-getty@ttyAMA1.service
+  sudo systemctl disable serial-getty@ttyAMA1.service
+  sudo systemctl mask serial-getty@ttyAMA1.service
+
+Edit the follow:
+
+  sudo nano /etc/udev/rules.d/99-serial-permissions.rules
+  
+Replace contents with:
+
+KERNEL=="ttyAMA1", MODE="0666", GROUP="dialout", ENV{ID_MM_DEVICE_IGNORE}="1", OPTIONS+="static_node=ttyAMA1"
+
+Then:
+
+  sudo udevadm control --reload-rules
+  sudo udevadm trigger --action=change
+
+
+  sudo crontab -e
+add at end:
+  @reboot sleep 2 && setfacl -b /dev/ttyAMA1 && chmod 0666 /dev/ttyAMA1
+
+This got rid of the + that was appearing on permissions seen using
+  ls -l /dev/ttyAMA1
+as in:
+  crw-rw-rw-+ 1 root dialout 204, 65 May 31 12:32 /dev/ttyAMA1
+That tiny + sign at the end of the permission string is the missing piece of the puzzle. It means a hidden layer called an Access Control List (ACL) has taken control of the file.
+
+Added clearSerial.py to autorun.sh
+
+The clearSerial.py code is working, but the robot code is still failing.
+Putting the following in the start of the code finally sorted things out:
+    while mc.is_power_on() != 1:
+        print("Robot not responding or power is off. Sending power_on pulse...")
+        mc.power_on()
+        time.sleep(1.5)  # Give the embedded chip time to process
+        
+Further tests showed that it just needed the mc.power_on()
+
