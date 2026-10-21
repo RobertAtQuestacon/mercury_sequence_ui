@@ -22,7 +22,7 @@ Paste puts the clipboard in front of the current selected item.
 Append Sequence from JSON can be used to join different sequences together.
 Everything else should be fairly obvious.
 ## Autostart
-One of the reasons for creating this software was to allow autostart of a sequence. This has not been implemented in this version yet, but to do so, add a .desktop file to /home/er/.config/autostart
-An example is attached: autoruyn.desktop
+One of the reasons for creating this software was to allow autostart of a movement sequence on the robot arm. This has not been implemented in this version, but to automatically run this software at boot time, add the autorun.desktop file to /home/er/.config/autostart and edit it to point to the autorun.sh script.
+This should work with a warm reboot, but for a cold boot some extra steps are/maybe necessary. See changes that need to be made in the system configuration in FixingAutoStart.txt
 
 
