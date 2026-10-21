@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=/home/er/Documents/my_code/autorun.sh
+Hidden=false
+X-MATE-Autostart-enabled=true
+Name[en_US]=Autorun
+Name=Autorun
+Comment[en_US]=Autorun
+Comment=Autorun
+X-MATE-Autostart-Delay=4
