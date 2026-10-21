@@ -3,7 +3,8 @@
 ![SequenceProgram_screenhot](SeqProgTab.png)
 ## Description
 The Mercury-A1 robotic arm by Elephant Robotics comes with a raspberry pi computer (M5Stack CM4Stack) which is Linux based and has a touch screen for user operation.
-The attached python code uses the preinstalled pymycobot.py library to display a Tkinter gui to control the robot.
+I found the touch screen interface limiting.
+The attached python code uses the preinstalled pymycobot.py library to display a Tkinter gui on an externally attached screen to control the robot using mouse and keyboard.
 The library is in active development and can be found at https://github.com/elephantrobotics/pymycobot/tree/main
 To update the library without connecting to the internet, replace the pymycobot folder at /home/er/,local/lib/python3.8/site-packages
 ## Using
